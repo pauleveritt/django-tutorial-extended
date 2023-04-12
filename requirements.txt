@@ -1,4 +1,5 @@
 asgiref==3.6.0
+asgiref==3.6.0
 beautifulsoup4==4.12.2
 certifi==2022.12.7
 charset-normalizer==3.1.0
@@ -6,6 +7,7 @@ colorama==0.4.6
 Django==4.2
 djangorestframework==3.14.0
 exceptiongroup==1.1.1
+html5lib
 idna==3.4
 iniconfig==2.0.0
 packaging==23.0

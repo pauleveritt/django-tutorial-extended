@@ -1,0 +1,8 @@
+{
+  "name": "django-tutorial-extended",
+  "version": "1.0.0",
+  "devDependencies": {
+    "prettier": "^2.8.7",
+    "tailwindcss": "^3.3.1"
+  }
+}

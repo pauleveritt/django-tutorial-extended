@@ -3,6 +3,8 @@ import requests
 from bs4 import BeautifulSoup
 from django.utils import timezone
 
+from conftest import QUESTION_TEXT
+
 
 def get_html_document(url):
     # request for HTML document of given url
@@ -53,3 +55,21 @@ def test_image_exist_in_the_page(question, api_client):
 
     image_exist = "PyCharm.svg" in images_list
     assert image_exist is True
+
+
+@pytest.mark.django_db
+def test_polls_index(client, question):
+    response = client.get("/polls/")
+
+    # Get at the view's context data, meaning, query result
+    rows = response.context_data["object_list"]
+    assert len(rows) > 0
+
+    # Test the base template's rendering
+    html = BeautifulSoup(response.content, "html5lib")
+    avatar = html.select_one("#avatar")
+    assert avatar["src"] == "/static/polls/images/man.png"
+
+    # Make sure we rendered a question
+    question_texts = html.select(".question_text")
+    assert question_texts[0].text == QUESTION_TEXT
