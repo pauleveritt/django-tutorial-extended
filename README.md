@@ -1,5 +1,7 @@
-# django_tutorial
-The end of the Django official tutorial, setup for PyCharm Professional demos
+
+# Django Tutorial Extended
+
+The official Django tutorial, extended for PyCharm demo uses.
 
 ## Installation
 
@@ -15,3 +17,13 @@ The end of the Django official tutorial, setup for PyCharm Professional demos
 5. Run the created run config (probably named `django_tutorial`)
 6. Visit `http://127.0.0.1:8000/admin/` and add a question
 7. Visit `http://127.0.0.1:8000/polls/`
+
+## Main Demo
+
+
+
+## Extended Demo
+
+This will be used in the sponsor talk at PyCon US 2023.
+It emphasizes points made in Adam Johnson's Django DX book.
+
