@@ -1,3 +1,5 @@
+import React from "react";
+
 export function Index() {
   return (
     <div className="grid gap-4 grid-cols-4 mx-2 mt-2">
