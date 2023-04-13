@@ -24,7 +24,8 @@ Other steps:
 - `Mark as Templates Folder` for `polls/templates`
 - `Settings | Languages & Frameworks | JavaScript | Prettier` and set it up to run on save/reformat
 - Ensure Django support and pytest are configured in settings
-- 
+- In the main template, find the `<script>` for Tailwind, Alt-Enter on the URL, and "Download" as a library
+- (Optional) Install the BlackConnect plugin and set it up to run on reformat/save
 
 ## Main Demo
 
