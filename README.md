@@ -41,6 +41,14 @@ We're going to talk about the "I" in "IDE".
   - Configures Django support
 - Or, clone https://github.com/pauleveritt/django-tutorial-extended from VCS
 
+#### Auto-completion from CDN
+
+If you’re using Bootstrap/Tailwind/DaisyUI or another CSS library linked 
+from a CDN, you can get completion for the class names 
+from that library – no need to add its sources to the project.
+
+Reference: [https://www.jetbrains.com/webstorm/guide/tips/library-completion/](https://www.jetbrains.com/webstorm/guide/tips/library-completion/)
+
 ### Running Django Server
 
 - Starts in reload mode (not a big deal)
