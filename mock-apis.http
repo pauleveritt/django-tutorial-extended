@@ -1,0 +1,35 @@
+# Get lists of questions
+GET http://localhost:8000/v1/question/
+
+###
+
+# Get Question with specific ID
+
+GET http://localhost:8000/v1/question/1
+
+###
+
+# Add a new Question
+POST http://localhost:8000/v1/question/
+Content-Type: application/json
+
+{
+  "question_text": "Sample Question Testing !",
+  "pub_date": "2023-02-01"
+}
+
+###
+# Update Question with specific ID
+PUT http://localhost:8000/v1/question/5
+Content-Type: application/json
+
+{
+  "question_text": "Sample Testing !",
+  "pub_date": "2023-02-01"
+}
+
+###
+# Delete Question with Specific ID
+DELETE http://localhost:8000/v1/question/5
+
+
