@@ -1,7 +1,10 @@
+from django.db.models import Max
+from rest_framework import status
 from rest_framework.generics import (ListCreateAPIView, RetrieveUpdateDestroyAPIView)
 from rest_framework.response import Response
+from rest_framework.views import APIView
 
-from polls.models import Question
+from polls.models import Question, Choice
 from . import serializers
 
 
@@ -29,3 +32,24 @@ class QuestionRetrieveUpdateDestroyAPI(RetrieveUpdateDestroyAPIView):
             instance._prefetched_objects_cache = {}
 
         return Response({"status": True, "message": "Question Updated !", "data": serializer.data})
+
+
+class ChoiceVoteAPI(APIView):
+    def post(self, request):
+        post_data = request.data
+        serializer = serializers.VoteSerializer(data=post_data)
+        if serializer.is_valid(raise_exception=True):
+            valid_data = serializer.validated_data
+            print(valid_data["question_id"])
+            choice_obj = Choice.objects.filter(question_id=valid_data["question_id"], id=valid_data["choice_id"])
+            max_votes = choice_obj.aggregate(Max('votes'))['votes__max']
+            if valid_data["vote"]:
+                vote_count = max_votes + 1
+            else:
+                if max_votes <= 0:
+                    vote_count = 0
+                else:
+                    vote_count = max_votes - 1
+            choice_obj.update(votes=vote_count)
+        return Response({"status": True, "message": "Voted Successfully !",
+                         "data": None}, status=status.HTTP_201_CREATED)

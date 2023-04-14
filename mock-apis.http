@@ -32,4 +32,20 @@ Content-Type: application/json
 # Delete Question with Specific ID
 DELETE http://localhost:8000/v1/question/5
 
+###
+# Up/Down Vote Question
+# If you want to up-vote -> 1 || down-vote -> 0
+
+POST http://localhost:8000/v1/vote/
+Content-Type: application/json
+
+{
+  "question_id": 6,
+  "choice_id": 1,
+  "vote": 1
+}
+
+###
+
+
 
