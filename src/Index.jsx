@@ -5,26 +5,29 @@ export function Index() {
   let [questions, setQuestions] = useState(null);
 
   useEffect(() => {
-    fetch(URL)
-      .then((response) => response.json())
-      .then((data) => {
-        setQuestions(data.message);
-      });
+    const fetchData = async () => {
+      const response = await fetch(URL)
+        .then((response) => response.json())
+        .then((data) => {
+          setQuestions(data);
+        });
+    };
+    // noinspection JSIgnoredPromiseFromCall
+    fetchData();
   }, []);
-
   return (
     <div className="grid gap-4 grid-cols-4 mx-2 mt-2">
       <h1>Questions</h1>
-      <p>
+      <ul>
         {questions &&
           questions.map((question) => (
-            <ul>
-              <a key={question.id} href={`${URL}/${question.id}`}>
-                <li>{question.question_text}</li>
+            <li key={question.id}>
+              <a href={`${URL}/${question.id}`} aria-label="Question">
+                {question.question_text}
               </a>
-            </ul>
+            </li>
           ))}
-      </p>
+      </ul>
     </div>
   );
 }

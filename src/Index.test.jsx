@@ -1,7 +1,9 @@
+// noinspection JSUnresolvedReference,JSCheckFunctionSignatures
+
 import React from "react";
 
 import { beforeEach, expect, test } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { Index } from "./Index.jsx";
 
 // Setup fake response JSON
@@ -23,24 +25,19 @@ const questionListResponse = [
   },
 ];
 
-function sleep(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
 function createFetchResponse(data) {
   return { json: () => new Promise((resolve) => resolve(data)) };
 }
 
 beforeEach(async () => {
-  // noinspection JSUnresolvedReference
   fetch.mockResolvedValue(createFetchResponse(questionListResponse));
   render(<Index />);
-  await sleep(500);
+  await waitFor(() => screen.getByRole("link", { name: "Question" }));
 });
 
 test("load the polls on home page", async () => {
   // Find the questions
   const links = screen.getAllByRole("link");
-  expect(links).to.have.length(99);
-  const first = links[0];
-  expect(first.question_text).to.equal(questionListResponse[0].question_text);
+  expect(links).to.have.length(3);
+  expect(links[0].textContent).to.equal(questionListResponse[0].question_text);
 });
