@@ -56,6 +56,7 @@ Reference: [https://www.jetbrains.com/webstorm/guide/tips/library-completion/](h
   - Make a change to `polls/views.py` number of returned questions
   - See that Django restarts the process
 - Use `Run manage.py` tool window to `makemigrations`
+- For preloading questions into DB, make sure to run `python manage.py load_questions`
   - Nice to have that open all the time
 - Run server under the debugger
   - Always run it under the debugger, not a huge speed hit
