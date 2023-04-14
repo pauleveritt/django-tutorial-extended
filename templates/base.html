@@ -9,6 +9,36 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+
+<div class="flex flex-col h-screen">
+    <div class="navbar bg-info">
+        <div class="flex-1">
+            <img src="{% static 'polls/images/PyCharm.svg' %}" class="h-auto w-64"/>
+        </div>
+        <div class="flex-none gap-2">
+            <div class="form-control">
+                <input type="text" placeholder="Search" class="input input-bordered"/>
+            </div>
+            <div class="dropdown dropdown-end">
+                <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+                    <div class="w-10 rounded-full">
+                        <img id="avatar" src="{% static 'polls/images/man.png' %}"/>
+                    </div>
+                </label>
+                <ul tabindex="0"
+                    class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+                    <li>
+                        <a id="profile" class="justify-between">
+                            Profile
+                            <span class="badge">New</span>
+                        </a>
+                    </li>
+                    <li><a>Settings</a></li>
+                    <li><a>Logout</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
     {% block content %}{% endblock content %}
 
     <!-- footer -->
@@ -33,5 +63,6 @@
             <a class="link link-hover">JetBrains Mono</a>
             <a class="link link-hover">JetBrains Research</a>
         </div>
-    </footer></body>
+    </footer>
+</body>
 </html>

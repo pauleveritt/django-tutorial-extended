@@ -1,5 +1,5 @@
-from django.shortcuts import redirect
+from django.views.generic.base import TemplateView
 
 
-def index(request):
-    return redirect("polls:index")
+class IndexView(TemplateView):
+    template_name = 'index.html'
