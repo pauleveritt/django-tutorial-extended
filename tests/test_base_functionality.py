@@ -3,8 +3,7 @@ import json
 import pytest
 import requests
 from bs4 import BeautifulSoup
-from django.utils import timezone
-from rest_framework.test import APIClient
+
 from conftest import QUESTION_TEXT
 
 
