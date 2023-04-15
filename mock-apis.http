@@ -9,13 +9,26 @@ GET http://localhost:8000/v1/question/1
 
 ###
 
-# Add a new Question
 POST http://localhost:8000/v1/question/
 Content-Type: application/json
 
 {
-  "question_text": "Sample Question Testing !",
-  "pub_date": "2023-02-01"
+  "question_text": "This is a sample question",
+  "pub_date": "2022-01-01",
+  "choices": [
+    {
+      "choice_text": "Choice 1"
+    },
+    {
+      "choice_text": "Choice 2"
+    },
+    {
+      "choice_text": "Choice 3"
+    },
+    {
+      "choice_text": "Choice 4"
+    }
+  ]
 }
 
 ###
