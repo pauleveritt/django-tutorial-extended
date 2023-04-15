@@ -1,8 +1,10 @@
+import json
+
 import pytest
 import requests
 from bs4 import BeautifulSoup
 from django.utils import timezone
-
+from rest_framework.test import APIClient
 from conftest import QUESTION_TEXT
 
 
@@ -38,11 +40,25 @@ def get_html_document(url):
 @pytest.mark.django_db
 def test_adding_new_question(api_client):
     payload = {
-        "question_text": "This is a dummy text",
-        "pub_date": timezone.now()
+        "question_text": "This is a sample question",
+        "pub_date": "2022-01-01",
+        "choices": [
+            {
+                "choice_text": "Choice 1"
+            },
+            {
+                "choice_text": "Choice 2"
+            },
+            {
+                "choice_text": "Choice 3"
+            },
+            {
+                "choice_text": "Choice 4"
+            }
+        ]
     }
-
-    response = api_client.post("/v1/question/", payload)
+    payload = json.dumps(payload)
+    response = api_client.post("/v1/question/", payload, content_type="application/json")
     assert response.status_code == 201
 
 
