@@ -5,6 +5,9 @@ from polls.models import Question, Choice
 
 
 class ChoiceSerializer(serializers.ModelSerializer):
+    id = serializers.IntegerField(required=False)
+    votes = serializers.BooleanField(required=False)
+
     class Meta:
         model = Choice
         fields = ("id", "choice_text", "votes")
@@ -16,6 +19,14 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ("id", "question_text", "pub_date", "choices")
+
+    def create(self, validated_data):
+        choices = validated_data.pop('choices')
+        instance = super(QuestionSerializer, self).create(validated_data)
+        instance.save()
+        choice_obj = [Choice(choice_text=item['choice_text'], question=instance) for item in choices]
+        Choice.objects.bulk_create(choice_obj)
+        return instance
 
 
 class VoteSerializer(serializers.Serializer):
