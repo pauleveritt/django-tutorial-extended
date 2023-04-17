@@ -1,3 +1,8 @@
+# Get HTML listing at /polls/
+GET http://localhost:8000/polls/
+
+###
+
 # Get lists of questions
 GET http://localhost:8000/v1/question/
 

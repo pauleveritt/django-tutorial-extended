@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 
-
-
 {% block content %}
     <!-- content -->
     <div class="flex-grow">
@@ -10,7 +8,8 @@
             {% if latest_question_list %}
                 {% for question in latest_question_list %}
                     <div class="card lg:card-side bg-base-100 shadow-xl">
-                        <figure><img src="{% static 'polls/images/jb_beam.png' %}" alt="Album" class="w-32"/>
+                        <figure>
+                            <img src="{% static 'polls/images/jb_beam.png' %}" alt="Album" class="w-32"/>
                         </figure>
                         <div class="card-body">
                             <h2 class="card-title">Question Number {{ question.id }}</h2>
