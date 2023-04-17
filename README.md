@@ -26,7 +26,6 @@ Other steps:
 - `Settings | Languages & Frameworks | JavaScript | Prettier` and set it up to run on save/reformat
 - Ensure Django support and pytest are configured in settings
 - In the main template, find the `<script>` for Tailwind, Alt-Enter on the URL, and "Download" as a library
-- (Optional) Install the BlackConnect plugin and set it up to run on reformat/save
 - Add the SQLite instance in the database tool
 
 For the extended demo:
@@ -50,63 +49,77 @@ We're going to talk about the "I" in "IDE".
   - Configures Django support
 - Or, clone https://github.com/pauleveritt/django-tutorial-extended from VCS
 
-#### Auto-completion from CDN
-
-If you’re using Bootstrap/Tailwind/DaisyUI or another CSS library linked 
-from a CDN, you can get completion for the class names 
-from that library – no need to add its sources to the project.
-
-Reference: [https://www.jetbrains.com/webstorm/guide/tips/library-completion/](https://www.jetbrains.com/webstorm/guide/tips/library-completion/)
-
 ### Running Django Server
 
-- Starts in reload mode (not a big deal)
-  - Change a template, reload browser
-  - Make a change to `polls/views.py` number of returned questions
+- Shift-Shift `tem/bas` to open `templates/base.html`
+- Run the `Django Server` run configuration
+- Click on link in the run window
+- Navigate to `View Polls`
+  - Delete the `img` with `PyCharm.svg`
+  - Reload browser
+  - Cmd-Alt-O IndV to `polls/views.py` number of returned questions
+    by changing `[0:10]` to `[0:1]`
   - See that Django restarts the process
 - Use `Run manage.py` tool window to `makemigrations`
-- Run server under the debugger
-  - Always run it under the debugger, not a huge speed hit
+  - Cmd-Shift-A mana to bring up manage.py tool
+  - Type in `makemigrations`
+- Run server under the debugger, not a big speed hit
+  - Stop the running server
+  - Restart it with the debugger
   - Set breakpoints in: 
     - `polls.views.IndexView.get_queryset`
     - Also in `polls.templates/polls/index.html`
       - Inside `{% for question in latest_question_list %}`
-  - Issue a request to `/polls/`
+  - Reload the page at `/polls/`
   - Show stepping through Python and Django
   - Clear the breakpoints and resume
 
 ### IDE Features for Django
 
 - Autocomplete
-  - Navigate to `INSTALLED_APPS` in `mysite/settings.py`
+  - `Shift-Shift INS` to navigate to `INSTALLED_APPS` in `mysite/settings.py`
   - Autocomplete any package names in strings
-  - Open `polls/results.html` and autocomplete `.question_text`
+  - Make a typo, show the warning
+  - Open `Shift-Shift pol/ind` to open `polls/index.html`
+  - Autocomplete `latest_question_list` on line 9
 - Navigate
-  - Same spot in `polls/results.html`, navigate to `question_text`
+  - Same spot in `polls/index.html`, navigate to `latest_question_list`
   - Same for `INSTALLED_APPS`
-  - In `polls/index.html` navigate back and forth, view/template, via icon
+  - In `polls/index.html` navigate back and forth, view/template, via icons
 - Autoimport
-  - `polls/urls.py` and auto-import a `view.`
+  - `Cmd-Alt-O urlpa` to open `polls/urlpatterns.py`
+  - Change `views.ResultsView.as_view()` to `ReVi` and `Cmd-Space-Space` to autocomplete
+  - Show that it generated the import
 - Refactor
-  - Navigate to `IndexView`
+  - `Shift-Shift IndV` to navigate to `polls.views.IndexView`
   - Refactor Rename `index.html` to `djindex.html`
   - Point out the filename has changed
   - Undo
 
 ### Template Support
 
-- In `polls/index.html`
-- Recreate the `<img src` with Emmet, then template for `static`
-- Autocomplete the path
-- Show yellow squiggly on typo
-- Navigate to the PNG
+- `Shift-Shift pol/ind` to open `polls/index.html`
+- On Line 12, insert new line and recreate the `<img src` with Emmet
+  - `img tab` to start the `<img>` LiveTemplate
+  - template for `{% s` to start the `static` Django tag
+  - Autocomplete the part of the `polls/images/jb_beam.png` path
+  - Make a typo to show yellow squiggly
+  - Fix typo
+  - Cursor in the `jb_beam.png` segment
+  - Cmd-B to navigate to the PNG
 
 ### Test-First
 
-- `polls/tests.py`
-- In debug mode
+- `Cmd-Shift-A Spl Ri` to split right
+- On left: `Cmd-Alt-O IndV` to navigate to IndexView 
+- On right: `Cmd-Alt-O t_p` to navigate to `tests/test_base_functions.test_polls_index`
+- Click the gutter icon to run just that test
+- On left: put a breakpoint in `IndexView.get_queryset`
+- In test, click gutter icon and run in debug mode
 
 ### Git Pull Request Integration
+
+TODO We need to file a PR.
 
 ### Fullstack: HTTP Files against Django Rest Framework
 
@@ -114,6 +127,7 @@ Reference: [https://www.jetbrains.com/webstorm/guide/tips/library-completion/](h
 - Open `run-apis.http`
 - Run the first URL
 - Put a breakpoint in `IndexView.get_queryset` on the `return`
+- Click that URL again
 - Continue, clear breakpoint
 
 ### Fullstack: Tailwind
