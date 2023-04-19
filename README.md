@@ -31,6 +31,7 @@ Other steps:
 For the extended demo:
 
 - Have the `BlackConnect` plugin installed
+  - Have `blackd` installed somewhere, e.g. via pipx or add to the venv
   - But NOT set up to run on Reformat/Save
 - Install `.env` and `requirements` plugins
 
@@ -66,7 +67,7 @@ We're going to talk about the "I" in "IDE".
 - Run server under the debugger, not a big speed hit
   - Stop the running server
   - Restart it with the debugger
-  - Set breakpoints in: 
+  - Set breakpoints in:
     - `polls.views.IndexView.get_queryset`
     - Also in `polls.templates/polls/index.html`
       - Inside `{% for question in latest_question_list %}`
@@ -103,7 +104,7 @@ We're going to talk about the "I" in "IDE".
   - `img tab` to start the `<img>` LiveTemplate
   - template for `{% s` to start the `static` Django tag
   - Autocomplete the part of the `polls/images/jb_beam.png` path
-  - Make a typo to show yellow squiggly
+  - Make a typo to show squiggly
   - Fix typo
   - Cursor in the `jb_beam.png` segment
   - Cmd-B to navigate to the PNG
@@ -111,7 +112,7 @@ We're going to talk about the "I" in "IDE".
 ### Test-First
 
 - `Cmd-Shift-A Spl Ri` to split right
-- On left: `Cmd-Alt-O IndV` to navigate to IndexView 
+- On left: `Cmd-Alt-O IndV` to navigate to IndexView
 - On right: `Cmd-Alt-O t_p` to navigate to `tests/test_base_functions.test_polls_index`
 - Click the gutter icon to run just that test
 - On left: put a breakpoint in `IndexView.get_queryset`
@@ -148,6 +149,9 @@ TODO We need to file a PR.
 
 ### Fullstack: Prettier and eslint
 
+- Mention `package.json` and npm integration
+  - You get a popup with link for installing
+  - Autocomplete in package.json
 - In preferences, show Prettier integration
 - Make sure prettier on save and reformat are checked
 - In `Index.jsx` mess up spacing, indentation
@@ -188,6 +192,11 @@ This goes before the full-stack part and covers material from [Adam's "Boost You
 
 ### ipython
 
+- Cmd-Shift-A Py Con
+- Opens Python Console, with Django imports, using ipython
+- Note the different repl
+- `print(2+2)` with syntax highlighting, autocomplete
+
 ### EditorConfig
 
 - Make sure `BlackConnect` is off!
@@ -198,14 +207,16 @@ This goes before the full-stack part and covers material from [Adam's "Boost You
 - Change `14` back to `4`
 - Reformat Code
 
-### pre-commit
-
 ### Black
 
-### .env
+- Enable BlackConnect
+
+### pre-commit
+
+- Note the `.pre-commit-config.yaml`
+- Commit window, gear icon at bottom, show the checkbox for git hooks
 
 ### Testing (covered)
 
 This will be used in the sponsor talk at PyCon US 2023.
 It emphasizes points made in Adam Johnson's Django DX book.
-
