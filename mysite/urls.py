@@ -15,14 +15,23 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 from . import views
-
+from mysite.apis.v1 import views as question_view
+from polls import views as polls_view
 urlpatterns = [
-    path('', views.IndexView.as_view()),
-    path("polls/", include("polls.urls")),
+    path('', views.index_view, name="homepage"),
     path('admin/', admin.site.urls),
-    path('v1/', include('mysite.apis.v1.urls')),
+    path('v1/vote/', question_view.choice_vote, name="question-vote"),
+    path('v1/question/list', question_view.question_list, name="question-list"),
+    path('v1/question/create', question_view.question_post, name="question-create"),
+    path('v1/question/retrieve/<int:pk>', question_view.question_retrieve, name="question-retrieve"),
+    path('v1/question/update/<int:pk>', question_view.question_update, name="question-update"),
+    path('v1/question/delete/<int:pk>', question_view.question_delete, name="question-delete"),
+    path("polls/", polls_view.index_view, name="poll-index"),
+    path("polls/<int:pk>/", polls_view.detail_view, name="poll-detail"),
+    path("polls/<int:pk>/results/", polls_view.results_view, name="poll-results"),
+    path("polls/<int:question_id>/vote/", polls_view.vote, name="poll-vote"),
 
 ]
 
