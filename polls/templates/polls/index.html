@@ -18,7 +18,7 @@
 
                                 {% for choice in question.choices.all %}
                                     <div class="badge badge-outline">{{ choice.choice_text }} &nbsp; (<span
-                                            class="text-green-500"><strong>{{ choice.votes }}</strong> </span>)
+                                        class="text-green-500"><strong>{{ choice.votes }}</strong> </span>)
                                     </div>
                                 {% endfor %}
 
@@ -32,7 +32,4 @@
             {% endif %}
         </div>
     </div>
-    </div>
-
 {% endblock content %}
-
