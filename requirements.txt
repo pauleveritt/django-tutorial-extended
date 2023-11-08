@@ -3,7 +3,7 @@ beautifulsoup4==4.12.2
 certifi==2022.12.7
 charset-normalizer==3.1.0
 colorama==0.4.6
-Django==4.2
+Django==5.0b1
 django-cors-headers==3.14.0
 djangorestframework==3.14.0
 exceptiongroup==1.1.1
