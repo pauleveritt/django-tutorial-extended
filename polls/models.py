@@ -1,6 +1,7 @@
 import datetime
 
 from django.db import models
+from django.db.models import F
 from django.utils import timezone
 from django.contrib import admin
 
@@ -8,6 +9,11 @@ from django.contrib import admin
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published")
+    closed_date = models.DateTimeField("date closed", null=True)
+    poll_duration = models.GeneratedField(
+        expression=F("closed_date") - F("pub_date"),
+        db_persist=True,
+    )
 
     @admin.display(
         boolean=True,
