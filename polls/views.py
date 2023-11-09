@@ -1,9 +1,11 @@
+from django.forms import formset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 
+from .forms import AddQuestionForm, AddChoiceForm
 from .models import Choice, Question
 
 
@@ -56,3 +58,32 @@ def vote(request, question_id):
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+
+
+def add_question(request):
+    ChoiceFormSet = formset_factory(AddChoiceForm, extra=4)
+    if request.POST:
+        question_form = AddQuestionForm(request.POST)
+        choice_formset = ChoiceFormSet(request.POST)
+        if question_form.is_valid() and choice_formset.is_valid():
+            new_question = Question.objects.create(
+                question_text=question_form.cleaned_data["question_text"],
+                pub_date=timezone.now(),
+                closed_date=question_form.cleaned_data.get("closed_date"),
+            )
+            for choice_form in choice_formset:
+                if "choice_text" in choice_form.cleaned_data:
+                    Choice.objects.create(
+                        question=new_question,
+                        choice_text=choice_form.cleaned_data["choice_text"]
+                    )
+            return HttpResponseRedirect(reverse("polls:index"))
+    else:
+        question_form = AddQuestionForm()
+        choice_formset = ChoiceFormSet()
+
+    return render(
+        request,
+        template_name="polls/add.html",
+        context={"question_form": question_form, "choice_formset": choice_formset}
+    )

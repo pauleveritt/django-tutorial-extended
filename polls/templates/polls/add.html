@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <!-- content -->
+    <div class="flex-grow">
+        <div class="card bg-base-100 shadow-xl mt-4 ml-4 mb-2">
+            <div class="card-body">
+                <div class="card-title">
+                    <h1>Add Question</h1>
+                </div>
+                <form action="{% url 'polls:add' %}" method="post">
+                    {% csrf_token %}
+                    <div class="container">
+                        <div class="mt-2 row">
+                            <div class="col-sm-10">{{ question_form.question_text.as_field_group }}</div>
+                            <div class="col-sm-10">{{ question_form.closed_date.as_field_group }}</div>
+                        </div>
+                    </div>
+                    <div class="mt-4">
+                        {{ choice_formset }}
+                    </div>
+                    <div class="card-actions mt-2">
+                        <button type="submit" class="btn btn-secondary" style="color: black">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
+
