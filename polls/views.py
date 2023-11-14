@@ -60,8 +60,27 @@ def vote(request, question_id):
         return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
 
 
+def add_choice(request):
+    new_total = int(request.POST["form-TOTAL_FORMS"]) + 1
+    ChoiceFormSet = formset_factory(AddChoiceForm, extra=new_total)
+    post_data = {}
+    # Add a new form instance to the formset
+    for key, data in request.POST.items():
+        post_data[key] = data
+        if key.startswith("form-0"):
+            new_key = key.replace("form-0", f"form-{new_total - 1}")
+            post_data[new_key] = ""
+    post_data["form-TOTAL_FORMS"] = str(new_total)
+    choice_formset = ChoiceFormSet(post_data)
+    return render(
+        request,
+        template_name="snippets/formset.html",
+        context={"formset": choice_formset}
+    )
+
+
 def add_question(request):
-    ChoiceFormSet = formset_factory(AddChoiceForm, extra=4)
+    ChoiceFormSet = formset_factory(AddChoiceForm, extra=1)
     if request.POST:
         question_form = AddQuestionForm(request.POST)
         choice_formset = ChoiceFormSet(request.POST)
@@ -85,5 +104,5 @@ def add_question(request):
     return render(
         request,
         template_name="polls/add.html",
-        context={"question_form": question_form, "choice_formset": choice_formset}
+        context={"question_form": question_form, "formset": choice_formset}
     )

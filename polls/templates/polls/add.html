@@ -18,7 +18,17 @@
                         </div>
                     </div>
                     <div class="mt-4">
-                        {{ choice_formset }}
+                        <div id="choice-formset">
+                            {% include "snippets/formset.html" %}
+                        </div>
+                        <button type="submit"
+                            class="btn btn-info"
+                            hx-post="{% url 'polls:add_choice' %}"
+                            hx-target="#choice-formset"
+                            hx-swap="innerHTML"
+                        >
+                            Add Choice
+                        </button>
                     </div>
                     <div class="card-actions mt-2">
                         <button type="submit" class="btn btn-secondary" style="color: black">Create</button>

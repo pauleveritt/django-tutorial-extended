@@ -1,16 +1,13 @@
 from django import forms
 
+from utils.forms import BaseForm
 
-class AddQuestionForm(forms.Form):
+
+class AddQuestionForm(BaseForm):
     question_text = forms.CharField(label="Question", max_length=100)
-    closed_date = forms.DateField(
-        label="Poll closed at",
-        widget=forms.SelectDateWidget,
-        required=False,
-    )
 
 
-class AddChoiceForm(forms.Form):
+class AddChoiceForm(BaseForm):
     choice_text = forms.CharField(
         label="Choice",
         max_length=200,
