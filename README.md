@@ -10,12 +10,12 @@ The official Django tutorial, extended for PyCharm demo uses.
    - Prompt to install dependencies from `requirements.txt`
    - Configure the settings that recognize this as a Django project
    - Make a Django run configuration
-- `npm install` to get JS dependencies.
+- (Optional) `npm install` to get JS dependencies.
 - Open PyCharm's `manage.py` console via `Tools | Run manage..py task`
 - `makemigrations` and press enter
 - `migrate` and press enter
 - `createsuperuser` (and answer the questions)
-- For preloading questions into DB, make sure to run `python manage.py load_questions`
+- For preloading data into DB, make sure to run `python manage.py load_data`
 - Run the created run config (probably named `django_tutorial`)
 - Visit `http://127.0.0.1:8000/admin/` and add a question
 - Visit `http://127.0.0.1:8000/polls/`

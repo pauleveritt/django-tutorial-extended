@@ -4,7 +4,7 @@
 {% block content %}
     <!-- content -->
     <div class="flex-grow">
-        <a class="btn btn-secondary mt-2 ml-2" href="{% url 'polls:add' %}" style="color: black">Add</a>
+        <a class="btn btn-info mt-2 ml-2" href="{% url 'polls:add' %}">Add</a>
         <div class="grid gap-4 grid-cols-4 mx-2 mt-2">
             {% if latest_question_list %}
                 {% for question in latest_question_list %}
@@ -13,6 +13,7 @@
                             <img src="{% static 'polls/images/jb_beam.png' %}" alt="Album" class="w-32"/>
                         </figure>
                         <div class="card-body">
+                            <a href="{% url 'polls:detail' question.id %}">
                             <h2 class="card-title">Question Number {{ question.id }}</h2>
                             <p class="question_text">{{ question.question_text }}</p>
                             <div class="card-actions justify-end">
@@ -25,6 +26,7 @@
 
                                 <!--<button class="btn btn-primary">Listen</button>-->
                             </div>
+                            </a>
                         </div>
                     </div>
                 {% endfor %}

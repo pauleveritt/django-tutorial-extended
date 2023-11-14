@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from polls.models import Question, Choice
+from polls.models import Choice, Question
 
 
 class ChoiceSerializer(serializers.ModelSerializer):
@@ -21,10 +21,13 @@ class QuestionSerializer(serializers.ModelSerializer):
         fields = ("id", "question_text", "pub_date", "choices")
 
     def create(self, validated_data):
-        choices = validated_data.pop('choices')
+        choices = validated_data.pop("choices")
         instance = super(QuestionSerializer, self).create(validated_data)
         instance.save()
-        choice_obj = [Choice(choice_text=item['choice_text'], question=instance) for item in choices]
+        choice_obj = [
+            Choice(choice_text=item["choice_text"], question=instance)
+            for item in choices
+        ]
         Choice.objects.bulk_create(choice_obj)
         return instance
 
@@ -42,8 +45,9 @@ class VoteSerializer(serializers.Serializer):
         if Question.objects.filter(id=question_id).exists() is False:
             raise ValidationError("This question ID does not exist !")
 
-        if Choice.objects.filter(id=choice_id, question_id=question_id).exists() is False:
+        if (
+            Choice.objects.filter(id=choice_id, question_id=question_id).exists()
+            is False
+        ):
             raise ValidationError("This choice ID does not exist !")
         return attrs
-
-

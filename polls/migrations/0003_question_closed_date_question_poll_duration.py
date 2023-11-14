@@ -5,20 +5,24 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('polls', '0002_alter_choice_question_alter_choice_votes'),
+        ("polls", "0002_alter_choice_question_alter_choice_votes"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='question',
-            name='closed_date',
-            field=models.DateTimeField(null=True, verbose_name='date closed'),
+            model_name="question",
+            name="closed_date",
+            field=models.DateTimeField(null=True, verbose_name="date closed"),
         ),
         migrations.AddField(
-            model_name='question',
-            name='poll_duration',
-            field=models.GeneratedField(db_persist=True, expression=django.db.models.expressions.CombinedExpression(models.F('closed_date'), '-', models.F('pub_date'))),
+            model_name="question",
+            name="poll_duration",
+            field=models.GeneratedField(
+                db_persist=True,
+                expression=django.db.models.expressions.CombinedExpression(
+                    models.F("closed_date"), "-", models.F("pub_date")
+                ),
+            ),
         ),
     ]

@@ -1,9 +1,9 @@
 import datetime
 
+from django.contrib import admin
 from django.db import models
 from django.db.models import F
 from django.utils import timezone
-from django.contrib import admin
 
 
 class Question(models.Model):
@@ -29,7 +29,9 @@ class Question(models.Model):
 
 
 class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="choices")
+    question = models.ForeignKey(
+        Question, on_delete=models.CASCADE, related_name="choices"
+    )
     choice_text = models.CharField(max_length=200)
     votes = models.IntegerField(db_default=0)
 

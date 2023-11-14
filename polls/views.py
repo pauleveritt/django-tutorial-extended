@@ -5,7 +5,7 @@ from django.urls import reverse
 from django.utils import timezone
 from django.views import generic
 
-from .forms import AddQuestionForm, AddChoiceForm
+from .forms import AddChoiceForm, AddQuestionForm
 from .models import Choice, Question
 
 
@@ -18,7 +18,11 @@ class IndexView(generic.ListView):
         Return the last five published questions (not including those set to be
         published in the future).
         """
-        return Question.objects.filter(pub_date__lte=timezone.now()).order_by("-pub_date").select_related()[0:10]
+        return (
+            Question.objects.filter(pub_date__lte=timezone.now())
+            .order_by("-pub_date")
+            .select_related()[0:10]
+        )
 
 
 class DetailView(generic.DetailView):
@@ -30,11 +34,6 @@ class DetailView(generic.DetailView):
         Excludes any questions that aren't published yet.
         """
         return Question.objects.filter(pub_date__lte=timezone.now()).select_related()
-
-
-class ResultsView(generic.DetailView):
-    model = Question
-    template_name = "polls/results.html"
 
 
 def vote(request, question_id):
@@ -57,7 +56,7 @@ def vote(request, question_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
-        return HttpResponseRedirect(reverse("polls:results", args=(question.id,)))
+        return HttpResponseRedirect(reverse("polls:index"))
 
 
 def add_choice(request):
@@ -75,7 +74,7 @@ def add_choice(request):
     return render(
         request,
         template_name="snippets/formset.html",
-        context={"formset": choice_formset}
+        context={"formset": choice_formset},
     )
 
 
@@ -94,7 +93,7 @@ def add_question(request):
                 if "choice_text" in choice_form.cleaned_data:
                     Choice.objects.create(
                         question=new_question,
-                        choice_text=choice_form.cleaned_data["choice_text"]
+                        choice_text=choice_form.cleaned_data["choice_text"],
                     )
             return HttpResponseRedirect(reverse("polls:index"))
     else:
@@ -104,5 +103,5 @@ def add_question(request):
     return render(
         request,
         template_name="polls/add.html",
-        context={"question_form": question_form, "formset": choice_formset}
+        context={"question_form": question_form, "formset": choice_formset},
     )
