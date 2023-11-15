@@ -5,7 +5,7 @@
     <!-- content -->
     <div class="flex-grow">
         <a class="btn btn-info mt-2 ml-2" href="{% url 'polls:add' %}">Add</a>
-        <div class="grid gap-4 grid-cols-4 mx-2 mt-2">
+        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-2 mt-2">
             {% if latest_question_list %}
                 {% for question in latest_question_list %}
                     <div class="card lg:card-side bg-base-100 shadow-xl">
@@ -19,8 +19,8 @@
                             <div class="card-actions justify-end">
 
                                 {% for choice in question.choices.all %}
-                                    <div class="badge badge-outline">{{ choice.choice_text }} &nbsp; (<span
-                                            class="text-green-500"><strong>{{ choice.votes }}</strong> </span>)
+                                    <div class="badge badge-outline text-xs">{{ choice.choice_text }} &nbsp; (<span
+                                            class="text-green-500 text-xs"><strong>{{ choice.votes }}</strong> </span>)
                                     </div>
                                 {% endfor %}
 

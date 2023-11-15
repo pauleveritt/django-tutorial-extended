@@ -4,7 +4,7 @@
 {% block content %}
     <!-- content -->
     <div class="flex-grow">
-        <div class="grid gap-4 grid-cols-4 mx-2 mt-2">
+        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-2 mt-2">
             {% if article_list %}
                 {% for article in article_list %}
                     <div class="card lg:card-side bg-base-100 shadow-xl">
