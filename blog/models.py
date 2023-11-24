@@ -10,6 +10,7 @@ class Article(models.Model):
         expression=Lower(Replace(F("title"), Value(" "), Value("-"))),
         db_persist=True,
         unique=True,
+        output_field=models.TextField(),
     )
 
     def __str__(self):

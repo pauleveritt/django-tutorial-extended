@@ -13,6 +13,7 @@ class Question(models.Model):
     poll_duration = models.GeneratedField(
         expression=F("closed_date") - F("pub_date"),
         db_persist=True,
+        output_field=models.DurationField(),
     )
 
     @admin.display(
