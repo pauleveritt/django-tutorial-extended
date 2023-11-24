@@ -4,7 +4,8 @@
 {% block content %}
     <!-- content -->
     <div class="flex-grow">
-        <div class="grid gap-4 grid-cols-4 mx-2 mt-2">
+        <a class="btn btn-info mt-2 ml-2" href="{% url 'polls:add' %}">Add</a>
+        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-2 mt-2">
             {% if latest_question_list %}
                 {% for question in latest_question_list %}
                     <div class="card lg:card-side bg-base-100 shadow-xl">
@@ -12,18 +13,20 @@
                             <img src="{% static 'polls/images/jb_beam.png' %}" alt="Album" class="w-32"/>
                         </figure>
                         <div class="card-body">
+                            <a href="{% url 'polls:detail' question.id %}">
                             <h2 class="card-title">Question Number {{ question.id }}</h2>
                             <p class="question_text">{{ question.question_text }}</p>
                             <div class="card-actions justify-end">
 
                                 {% for choice in question.choices.all %}
-                                    <div class="badge badge-outline">{{ choice.choice_text }} &nbsp; (<span
-                                            class="text-green-500"><strong>{{ choice.votes }}</strong> </span>)
+                                    <div class="badge badge-outline text-xs">{{ choice.choice_text }} &nbsp; (<span
+                                            class="text-green-500 text-xs"><strong>{{ choice.votes }}</strong> </span>)
                                     </div>
                                 {% endfor %}
 
                                 <!--<button class="btn btn-primary">Listen</button>-->
                             </div>
+                            </a>
                         </div>
                     </div>
                 {% endfor %}
@@ -31,7 +34,6 @@
                 <p>No polls are available.</p>
             {% endif %}
         </div>
-    </div>
     </div>
 
 {% endblock content %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+    <!-- content -->
+    <div class="flex-grow">
+        <div class="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mx-2 mt-2">
+            {% if article_list %}
+                {% for article in article_list %}
+                    <div class="card lg:card-side bg-base-100 shadow-xl">
+                        <div class="card-body">
+                            <h2 class="card-title">{{ article.title }}</h2>
+                            <p class="card-text">Id eu nisl nunc mi ipsum faucibus. Purus faucibus ornare suspendisse sed nisi lacus sed...</p>
+                            <a class="bg-purple-900 text-white hover:bg-blue-400 font-bold py-2 px-4 mt-3 rounded"
+                                href="{{ article.get_absolute_url }}">VIEW</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No articles are available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock content %}
+

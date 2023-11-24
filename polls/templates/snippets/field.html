@@ -1,0 +1,12 @@
+{% if field.use_fieldset %}
+  <fieldset>
+    <div class="pt-2 pb-2">
+  {% if field.label %}{{ field.legend_tag }}{% endif %}
+{% else %}
+  <div class="pt-2 pb-2">
+  {% if field.label %}{{ field.label_tag }}{% endif %}
+{% endif %}
+{% if field.help_text %}<div class="helptext"{% if field.id_for_label %} id="{{ field.id_for_label}}_helptext"{% endif %}>{{ field.help_text|safe }}</div>{% endif %}
+{{ field.errors }}
+{{ field }}
+{% if field.use_fieldset %}</div></fieldset>{% else %}</div>{% endif %}

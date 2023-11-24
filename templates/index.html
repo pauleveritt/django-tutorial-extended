@@ -3,15 +3,14 @@
 
 {% block content %}
 
-    <section class="container mx-auto flex justify-center">
-        <img src="{% static 'polls/images/welcome.jpg' %}" alt="welcome">
-    </section>
-
-
     <div class="container py-10 px-10 mx-0 min-w-full flex flex-col items-center">
         <a class="bg-purple-900 text-white hover:bg-blue-400 font-bold py-2 px-4 mt-3 rounded"
            href="{% url 'polls:index' %}">VIEW POLLS</a>
     </div>
+
+    <section class="container mx-auto flex justify-center">
+        <img src="{% static 'polls/images/welcome.jpg' %}" alt="welcome">
+    </section>
 
 
 {% endblock %}

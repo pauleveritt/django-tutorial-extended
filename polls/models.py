@@ -1,13 +1,20 @@
 import datetime
 
-from django.db import models
-from django.utils import timezone
 from django.contrib import admin
+from django.db import models
+from django.db.models import F
+from django.utils import timezone
 
 
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     pub_date = models.DateTimeField("date published")
+    closed_date = models.DateTimeField("date closed", null=True)
+    poll_duration = models.GeneratedField(
+        expression=F("closed_date") - F("pub_date"),
+        db_persist=True,
+        output_field=models.DurationField(),
+    )
 
     @admin.display(
         boolean=True,
@@ -23,9 +30,11 @@ class Question(models.Model):
 
 
 class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name="choices")
+    question = models.ForeignKey(
+        Question, on_delete=models.CASCADE, related_name="choices"
+    )
     choice_text = models.CharField(max_length=200)
-    votes = models.IntegerField(default=0)
+    votes = models.IntegerField(db_default=0)
 
     def __str__(self):
         return self.choice_text
